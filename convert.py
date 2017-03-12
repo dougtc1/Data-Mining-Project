@@ -9,10 +9,8 @@ from collections import defaultdict
 path = '/home/dougtc/Desktop/USB/mineria/proyecto/set-a/'
 promedios = {}
 promedios = defaultdict(lambda: [], promedios)
-contador = 0
 
 def cargarDataset(nombre):
-	global contador
 	data = {}
 	data = defaultdict(lambda: [], data)
 	faltantes = {}
@@ -37,7 +35,7 @@ def cargarDataset(nombre):
 			valor = -1.0
 		elif palabras[1] == 'NIDiasABP' and (valor < 30.0 or valor > 120.0):
 			valor = -1.0
-		elif palabras[1] == 'Height' and valor > 0.0 and valor > 210.0 and ((valor < 160.0 and data['Gender'] == [1.0]) or (valor < 153.0 and data['Gender'] == [0.0])):
+		elif palabras[1] == 'Height' and ((valor < 160.0 and data['Gender'] == [1.0]) or (valor < 153.0 and data['Gender'] == [0.0]) or valor > 210.0 or valor < 153.0):
 			valor = -1.0
 		elif palabras[1] == 'Weight' and (valor < 45.0 or valor > 150.0):
 			valor = -1.0
@@ -113,7 +111,20 @@ def main():
 	tmp.remove('Weight')
 	atributos = ['RecordID', 'ICUType', 'Gender', 'Age', 'Height', 'Weight']
 	for i in range(len(tmp)):
-		atributos.append(tmp.pop())
+		dummy = tmp.pop()
+		a = dummy + str('/Min')
+		b = dummy + str('/Max')
+		c = dummy + str('/Median')
+		d = dummy + str('/First')
+		e = dummy + str('/Last')
+		f = dummy + str('/Number')
+		atributos.append(a)
+		atributos.append(b)
+		atributos.append(c)
+		atributos.append(d)
+		atributos.append(e)
+		atributos.append(f)
+
 	for i in aux:
 		atributos.append(i)
 	
@@ -160,13 +171,19 @@ def main():
 	
 		# Aquí se escribe el paciente en el archivo .csv
 		for x in atributos:
-			n = len(i[0][x])
-			for y in i[0][x]:
-				linea += str(y) + ','
+			attr = x.split('/')
+			if (len(attr) > 1 and attr[1] != 'Min'):
+				continue
+			n = len(i[0][attr[0]])
+			if (n == 0):
+				linea += '      ' 
+			else:
+				for y in i[0][attr[0]]:
+					linea += str(y) + ','
 
 		for z in outcomes[i[0]['RecordID'][0]][1:]:
 			linea += str(z) + ','
-			
+
 		salida.write(linea[:-1])
 		salida.write('\n')
 		linea = ''
