@@ -1,0 +1,25 @@
+
+PRIMERA PARTE: Preprocesamiento y Exploració de Datos 
+Entrega :Lunes 13-03-2017 hasta las 11:59 media noche
+Generación Dataset: Aquellos proyectos que tienen la dataset estructurada, no le toca este paso.
+Exploración de Datos
+Informe: Donde se reflejan los siguientes puntos:
+Capítulo I: Introducción
+Descripción del problem
+Objetivos
+Objetivo General: Viene siendo el mismo título del proyecto
+Objetivos Específicos
+Estado de Arte (Enfoques existentes: lo que han presentado en clase)
+Capítulo II: Metodología
+Preprocesamiento de Datos: Este paso en esta entrega se aplica solamente a aquellos proyectos que les toca convertir data no estructura a data estructura. Se describe la dataset generada : Atributos, tipo de datos, etc. No. de instnacias. Todas las estadisticas necesarias
+Exploración de Datos: Histogramas de atributos y Scatter Plot entre dos atributos
+
+
+
+
+For the static variables; age,
+initial weight, height, and gender, this was done by directly
+treating the value present as a feature. For the temporal
+variables, this was done by extracting the minimum, max-
+imum, median, first, last, and number of values for each
+time stamped variable.
